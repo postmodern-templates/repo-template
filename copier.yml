@@ -92,6 +92,7 @@ _migrations:
             )
             + "\n",
             encoding="utf-8",
+            newline="\n",
         )
         print(f"Seeded knope-current-version.json with {version!r} from the latest release tag.")
     when: "{{ _stage == 'after' }}"
