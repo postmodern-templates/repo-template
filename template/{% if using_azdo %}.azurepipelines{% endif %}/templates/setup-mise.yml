@@ -4,8 +4,10 @@
 steps:
   - bash: |
       # renovate: datasource=github-releases depName=jdx/mise
-      curl https://mise.run | MISE_VERSION=v2026.10.10 MISE_INSTALL_SKIP_IF_EXISTS=1 sh
-      echo "##vso[task.prependpath]$(HOME)/.local/share/mise/bin"
+      curl https://mise.run | MISE_VERSION=v2026.10.10 MISE_INSTALL_SKIP_IF_EXISTS=1 \
+        MISE_INSTALL_PATH="$(HOME)/.local/bin/mise" sh
+      # Self-hosted agents, unlike Microsoft-hosted ones, may not have ~/.local/bin on PATH.
+      echo "##vso[task.prependpath]$(HOME)/.local/bin"
       echo "##vso[task.prependpath]$(HOME)/.local/share/mise/shims"
     displayName: Install Mise
   - task: Cache@2
