@@ -6,9 +6,9 @@ trigger:
       - "*"
 
 schedules:
-  # Runs inside renovate.json's "schedule": ["* 18 1 * *"] window (hour 18 UTC on the
-  # 1st). Azure Pipelines cron is standard cron with minute granularity, so it fires
-  # once in that window instead of polling.
+  # Runs inside renovate.json's "schedule": ["* * 1 * *"] window (all of the 1st, UTC).
+  # Azure Pipelines cron is standard cron with minute granularity, so it fires once in
+  # that window instead of polling.
   - cron: 0 18 1 * *
     displayName: Run Monthly Maintenance on the 1st of Each Month at 6pm UTC
     branches:
