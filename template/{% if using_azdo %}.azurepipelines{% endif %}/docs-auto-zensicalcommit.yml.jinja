@@ -88,7 +88,7 @@ stages:
               $PRTitle = "docs: build zensical"
               Write-Host "##vso[task.setvariable variable=PR_TITLE;]$PRTitle"
 
-              $ProjectBaseUri = "$(System.CollectionUri)/$(System.TeamProject)/_apis"
+              $ProjectBaseUri = "$(System.CollectionUri)/$(System.TeamProjectId)/_apis"
               $BaseSplat = @{
                 ContentType = "application/json"
                 Headers = @{
@@ -126,7 +126,7 @@ stages:
             env:
               SYSTEM_ACCESSTOKEN: $(System.AccessToken)
           - pwsh: |
-              $ProjectBaseUri = "$(System.CollectionUri)/$(System.TeamProject)/_apis"
+              $ProjectBaseUri = "$(System.CollectionUri)/$(System.TeamProjectId)/_apis"
               $BaseSplat = @{
                 ContentType = "application/json"
                 Headers = @{
@@ -166,7 +166,7 @@ stages:
               # bypassing it. This pipeline merges its own PR, unlike the release flow, which
               # leaves the merge to a person, so the PR has to pass the same policy as any
               # other.
-              $ProjectBaseUri = "$(System.CollectionUri)/$(System.TeamProject)/_apis"
+              $ProjectBaseUri = "$(System.CollectionUri)/$(System.TeamProjectId)/_apis"
               $BaseSplat = @{
                 ContentType = "application/json"
                 Headers = @{
@@ -214,7 +214,7 @@ stages:
 
               $MergeCommitMessage = "$(PR_TITLE)"
 
-              $ProjectBaseUri = "$(System.CollectionUri)/$(System.TeamProject)/_apis"
+              $ProjectBaseUri = "$(System.CollectionUri)/$(System.TeamProjectId)/_apis"
               $BaseSplat = @{
                 ContentType = "application/json"
                 Headers = @{
