@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.8.3 (2026-11-01)
+
+### Features
+
+- let integration tests create repos under a chosen owner (#1345)
+
+### Fixes
+
+- write the seeded version file with LF on Windows (#1348)
+- center the lifecycle notice above the README title (#1350)
+
 ## 0.8.2 (2026-10-31)
 
 ### Features
