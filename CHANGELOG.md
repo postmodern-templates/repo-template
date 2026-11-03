@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.4 (2026-11-03)
+
+### Fixes
+
+- name the Azure DevOps project by ID in pipeline REST calls (#1356)
+- widen the Renovate schedule to the whole of the 1st (#1358)
+- put mise's install directory on PATH for Azure Pipelines (#1359)
+
 ## 0.8.3 (2026-11-01)
 
 ### Features
