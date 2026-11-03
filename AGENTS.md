@@ -78,10 +78,11 @@ looks like 5-field cron, but Renovate reads it differently on every platform:
 - The minutes field **must** be `*`. Renovate has no minute-level granularity, and a schedule
   that restricts minutes is invalid.
 - A schedule defines an allowed **time window**, not a trigger time. Renovate runs on its own
-  polling cadence, outside this project, and acts only inside the window.
+  polling cadence, outside this project, and acts only inside the window. The Mend-hosted app
+  runs every few hours, so it can skip a one-hour window entirely; keep the window a full day.
 
-So `"* 18 1 * *"` is the correct form for "once a month, on the 1st, during hour 18". Don't
-change it to `"0 18 1 * *"`: that restricts the minutes field, which Renovate rejects.
+So `"* * 1 * *"` is the correct form for "once a month, on the 1st". Don't change it to
+`"0 0 1 * *"`: that restricts the minutes field, which Renovate rejects.
 
 Reference: <https://docs.renovatebot.com/key-concepts/scheduling/>
 

@@ -272,3 +272,22 @@ def test_azdo_pipelines_registered(template_source, tmp_path, answers):
     errors = _check_azdo_pipelines_registered(dest)
     # S101: `assert` is the normal, expected way to fail a pytest test.
     assert not errors, "\n\n".join(errors)  # noqa: S101
+
+
+@pytest.mark.parametrize("answers", RENDERABLE_ANSWERS, ids=lambda a: a["id"])
+def test_azdo_api_urls_use_project_id(template_source, tmp_path, answers):
+    """Verify Azure Pipelines REST calls name the project by ID, not by name.
+
+    Azure DevOps substitutes $(System.TeamProject) unescaped, so a project name with a
+    space breaks the URL (curl rejects it outright). The project ID is a GUID, which
+    REST routes accept in place of the name.
+    """
+    dest = tmp_path / "out"
+    _render(template_source, dest, answers)
+    pipelines = dest / ".azurepipelines"
+    offenders = [
+        str(path.relative_to(dest))
+        for path in sorted(pipelines.rglob("*.yml"))
+        if "$(System.TeamProject)/_apis" in path.read_text(encoding="utf-8")
+    ]
+    assert not offenders, offenders  # noqa: S101
